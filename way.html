@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Way of the Tiger Character Sheet</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fdf6e3;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px;
+      width: 100%;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #555;
+    }
+    #codeOutput {
+      margin-top: 15px;
+      background-color: #eee;
+      padding: 10px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>🐅 Way of the Tiger Character Sheet</h1>
+
+  <label for="name">Character Name</label>
+  <input type="text" id="name">
+
+  <label for="endurance">Endurance</label>
+  <input type="number" id="endurance">
+
+  <label for="innerForce">Inner Force</label>
+  <input type="number" id="innerForce">
+
+  <label for="ninjaSkills">Ninja Skills</label>
+  <input type="text" id="ninjaSkills" placeholder="Comma-separated (e.g. Acrobatics, Poison)" />
+
+  <label for="gold">Gold Pieces</label>
+  <input type="number" id="gold">
+
+  <label for="items">Items</label>
+  <input type="text" id="items" placeholder="Comma-separated (e.g. Shuriken, Healing Potion)" />
+
+  <button onclick="generateCode()">Generate Save Code</button>
+  <button onclick="loadCode()">Load from Code</button>
+
+  <label for="saveCode">Paste Save Code Here</label>
+  <input type="text" id="saveCode">
+
+  <div id="codeOutput"></div>
+
+  <script>
+    const wordList = [
+      "silent", "shadow", "iron", "fist", "tiger", "lotus", "strike", "wind", "flame", "venom",
+      "jade", "blade", "honor", "spirit", "claw", "night", "storm", "echo", "dragon", "whisper"
+    ];
+
+    function encodeToWords(data) {
+      const json = JSON.stringify(data);
+      let hash = 0;
+      for (let i = 0; i < json.length; i++) {
+        hash = (hash << 5) - hash + json.charCodeAt(i);
+        hash |= 0;
+      }
+      const words = [];
+      for (let i = 0; i < 4; i++) {
+        const index = Math.abs((hash >> (i * 8)) & 0xff) % wordList.length;
+        words.push(wordList[index]);
+      }
+      return words.join("-");
+    }
+
+    function decodeFromWords(code) {
+      // This is a placeholder: word-based codes are not reversible without a lookup table or database.
+      // You could store the full character data in localStorage using the code as a key.
+      const saved = localStorage.getItem(code);
+      return saved ? JSON.parse(saved) : null;
+    }
+
+    function generateCode() {
+      const character = {
+        name: document.getElementById('name').value,
+        endurance: document.getElementById('endurance').value,
+        innerForce: document.getElementById('innerForce').value,
+        ninjaSkills: document.getElementById('ninjaSkills').value,
+        gold: document.getElementById('gold').value,
+        items: document.getElementById('items').value
+      };
+      const code = encodeToWords(character);
+      localStorage.setItem(code, JSON.stringify(character));
+      document.getElementById('codeOutput').textContent = "Save Code:\n" + code;
+    }
+
+    function loadCode() {
+      const code = document.getElementById('saveCode').value.trim();
+      const character = decodeFromWords(code);
+      if (character) {
+        document.getElementById('name').value = character.name;
+        document.getElementById('endurance').value = character.endurance;
+        document.getElementById('innerForce').value = character.innerForce;
+        document.getElementById('ninjaSkills').value = character.ninjaSkills;
+        document.getElementById('gold').value = character.gold;
+        document.getElementById('items').value = character.items;
+        document.getElementById('codeOutput').textContent = "Character loaded from code!";
+      } else {
+        document.getElementById('codeOutput').textContent = "Invalid or unknown code.";
+      }
+    }
+  </script>
+</body>
+</html>
