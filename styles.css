@@ -194,43 +194,35 @@ button:hover {
   font-weight: 500;
 }
 
-/* Mobile scaling */
-@media (max-width: 768px) {
-  body {
-    padding: 20px;
-    font-size: 22px;
-  }
-
-  h1 {
-    font-size: 30px;
-  }
-
-  input,
-  textarea {
+@media (max-width: 1080px) {
+  /* Make key fields larger on mobile */
+  #name,
+  #location,
+  #punch,
+  #kick,
+  #_throw,
+  #shurikens,
+  #fate,
+  #innerForce,
+  #endurance {
     font-size: 1.4rem;
     padding: 18px;
+    border-width: 2px;
+    font-weight: 700;
   }
 
-  button {
-    font-size: 1.4rem;
-    padding: 20px;
-    min-width: 100%;
-  }
-
-  .shuriken-icon {
-    font-size: 48px;
-  }
-
-  .dice-icon {
-    font-size: 80px;
-  }
-
-  #codeOutput {
+  label[for="name"],
+  label[for="location"],
+  label[for="punch"],
+  label[for="kick"],
+  label[for="_throw"],
+  label[for="shurikens"],
+  label[for="fate"],
+  label[for="innerForce"],
+  label[for="endurance"] {
     font-size: 1.3rem;
-    padding: 18px;
-  }
-
-  .note {
-    font-size: 1.2rem;
+    font-weight: 800;
   }
 }
+
+
