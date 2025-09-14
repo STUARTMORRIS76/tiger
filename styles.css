@@ -190,7 +190,7 @@ button:hover {
   margin-top: 6px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
   body {
     padding: 20px;
     font-size: 18px;
@@ -251,3 +251,4 @@ button:hover {
     font-size: 1rem;
   }
 }
+
