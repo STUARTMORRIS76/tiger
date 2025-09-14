@@ -195,22 +195,7 @@ button:hover {
 }
 
 @media (max-width: 1080px) {
-  /* Make key fields larger on mobile */
-  #name,
-  #location,
-  #punch,
-  #kick,
-  #_throw,
-  #shurikens,
-  #fate,
-  #innerForce,
-  #endurance {
-    font-size: 1.4rem;
-    padding: 18px;
-    border-width: 2px;
-    font-weight: 700;
-  }
-
+  /* Enlarge labels for all key fields */
   label[for="name"],
   label[for="location"],
   label[for="punch"],
@@ -219,10 +204,45 @@ button:hover {
   label[for="shurikens"],
   label[for="fate"],
   label[for="innerForce"],
-  label[for="endurance"] {
-    font-size: 1.3rem;
-    font-weight: 800;
+  label[for="endurance"],
+  label[for="ninjatools"],
+  label[for="items"],
+  label[for="notes"] {
+    font-size: 1.4rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 6px;
+  }
+
+  /* Enlarge input and textarea fields */
+  #name,
+  #location,
+  #punch,
+  #kick,
+  #_throw,
+  #shurikens,
+  #fate,
+  #innerForce,
+  #endurance,
+  #ninjatools,
+  #items,
+  #notes {
+    font-size: 1.5rem !important;
+    padding: 18px !important;
+    border-width: 2px;
+    font-weight: 700;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* Enlarge dice and shuriken icons */
+  .dice-icon {
+    font-size: 80px !important;
+  }
+
+  .shuriken-icon {
+    font-size: 48px !important;
   }
 }
+
 
 
