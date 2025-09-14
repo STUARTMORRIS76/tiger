@@ -195,7 +195,7 @@ button:hover {
 }
 
 @media (max-width: 1080px) {
-  /* Enlarge labels for all key fields */
+  /* Labels: Bigger and bolder */
   label[for="name"],
   label[for="location"],
   label[for="punch"],
@@ -208,12 +208,13 @@ button:hover {
   label[for="ninjatools"],
   label[for="items"],
   label[for="notes"] {
-    font-size: 1.4rem !important;
-    font-weight: 800 !important;
-    margin-bottom: 6px;
+    font-size: 1.6rem !important;
+    font-weight: 900 !important;
+    line-height: 1.4;
+    margin-bottom: 8px;
   }
 
-  /* Enlarge input and textarea fields */
+  /* Inputs and Textareas: Bigger text, taller fields */
   #name,
   #location,
   #punch,
@@ -226,23 +227,29 @@ button:hover {
   #ninjatools,
   #items,
   #notes {
-    font-size: 1.5rem !important;
-    padding: 18px !important;
+    font-size: 1.6rem !important;
+    font-weight: 700 !important;
+    padding: 20px !important;
+    height: auto !important;
+    line-height: 1.5;
     border-width: 2px;
-    font-weight: 700;
-    width: 100% !important;
-    box-sizing: border-box;
+    border-radius: 10px;
   }
 
-  /* Enlarge dice and shuriken icons */
+  /* Dice and icons: visibly larger */
   .dice-icon {
-    font-size: 80px !important;
+    font-size: 90px !important;
   }
 
   .shuriken-icon {
-    font-size: 48px !important;
+    font-size: 52px !important;
+  }
+
+  /* Buttons: Bigger and bolder */
+  button {
+    font-size: 1.5rem !important;
+    padding: 20px 24px !important;
+    font-weight: 800 !important;
+    border-radius: 10px;
   }
 }
-
-
-
