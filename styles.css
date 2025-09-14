@@ -195,7 +195,7 @@ button:hover {
 }
 
 /* Mobile scaling */
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
   body {
     padding: 20px;
     font-size: 20px;
@@ -234,3 +234,4 @@ button:hover {
     font-size: 1.1rem;
   }
 }
+
