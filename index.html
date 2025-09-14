@@ -1,108 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <meta charset="UTF-8" />
   <title>Way of the Tiger Character Sheet</title>
   <style>
+.shuriken-icon {
+  font-size: 28px;
+  color: black; /* silver star */
+  transition: transform 0.2s ease;
+}
+
+
+    /* Page and scroll aesthetic */
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #fdf6e3;
-      padding: 20px;
-      max-width: 600px;
-      margin: auto;
+      background: url('https://www.transparenttextures.com/patterns/paper-fibers.png') repeat;
+      background-color: #f5ecd7;
+      padding: 30px;
+      margin: 0;
+      display: flex;
+      justify-content: center;
     }
+
     h1 {
       text-align: center;
-      color: #333;
+      color: #3b2f2f;
+      font-family: 'Papyrus', fantasy;
+      font-size: 28px;
+      margin: 0 0 16px 0;
+      border-bottom: 2px solid #3b2f2f;
+      padding-bottom: 10px;
     }
+
+    .scroll {
+      max-width: 760px;
+      width: 100%;
+    }
+
+    .scroll-inner {
+      background-color: #fffaf0;
+      border: 2px solid #3b2f2f;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      border-radius: 12px;
+      position: relative;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    /* Faux scroll ends */
+    .scroll-inner::before,
+    .scroll-inner::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 18px;
+      background: linear-gradient(to right, #c0a074, #e7d2a5 20%, #e7d2a5 80%, #c0a074);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .scroll-inner::before { top: -10px; border-top-left-radius: 12px; border-top-right-radius: 12px; }
+    .scroll-inner::after  { bottom: -10px; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
+
+    /* Form basics */
     label {
       display: block;
       margin-top: 10px;
       font-weight: bold;
+      color: #5c4438;
+      letter-spacing: 0.25px;
     }
-    input[type="text"], input[type="number"], textarea {
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
       width: 100%;
       padding: 8px;
       margin-top: 5px;
       box-sizing: border-box;
+      border: 1px solid #bfae97;
+      border-radius: 6px;
+      background-color: #fffef9;
+      color: #2f2a25;
     }
+
     textarea {
       resize: vertical;
-      height: 80px;
+      min-height: 80px;
     }
-    button {
+
+    /* Layout rows */
+    .stat-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .stat-group {
+      flex: 1;
+      min-width: 120px;
+    }
+
+    /* Specific widths to create compact stat fields */
+    #name { width: 220px; }
+    #location,
+    #kick,
+    #punch,
+    #_throw,
+    #fate,
+    #endurance,
+    #innerForce {
+      width: 60px;
+    }
+    /* Shurikens: about two characters wide; also constrain value range */
+    #shurikens {
+      width: 40px;
+    }
+
+    /* Make Ninja Tools and Items feel roomier */
+    #ninjatools,
+    #items {
+      min-height: 60px;
+      font-size: 1rem;
+      line-height: 1.3;
+    }
+
+    /* Buttons */
+    .button-row {
+      display: flex;
+      gap: 10px;
       margin-top: 15px;
-      padding: 10px;
-      width: 100%;
-      background-color: #333;
-      color: white;
+      flex-wrap: wrap;
+    }
+
+    button {
+      flex: 1;
+      padding: 10px 12px;
+      background-color: #3b2f2f;
+      color: #fff;
       border: none;
       cursor: pointer;
+      font-weight: bold;
+      border-radius: 6px;
+      min-width: 160px;
     }
+
     button:hover {
-      background-color: #555;
+      background-color: #5c4438;
     }
+
     #codeOutput {
       margin-top: 15px;
       background-color: #eee;
       padding: 10px;
       font-family: monospace;
       white-space: pre-wrap;
+      border-radius: 6px;
+      border: 1px solid #d7d7d7;
     }
+
+    /* Section dividers for scroll vibe */
+    .section {
+      padding: 8px 0 2px;
+      border-top: 1px dashed #bfae97;
+      margin-top: 14px;
+    }
+
+    .section:first-of-type {
+      border-top: none;
+      margin-top: 0;
+    }
+
+    .note {
+      color: #6a5749;
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+
+.dice-icon {
+  font-size: 40px;
+  color: #444;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+
   </style>
 </head>
 <body>
-  <h1>🐅 Way of the Tiger Character Sheet</h1>
+  <div class="scroll">
+    <h1>🐅 Way of the Tiger Character Sheet</h1>
+    <div class="scroll-inner">
+      <div class="section">
+        <div class="stat-row">
+          <div class="stat-group">
+            <label for="name">Character Name</label>
+            <input type="text" id="name" />
+          </div>
+          <div class="stat-group" style="flex:0 0 auto;">
+            <label for="location">Current Location</label>
+            <input type="number" id="location" />
+          </div>
+        </div>
+      </div>
 
-  <label for="name">Character Name</label>
-    <input type="text" id="name">
-   <label for="location">Current Location</label>
-  <input type="number" id="location">
-  <label for="punch">Punch</label>
-  <input type="number" id="punch">
-  <label for="kick">Kick</label>
-  <input type="number" id="kick">
-  <label for="_throw">Throw</label>
-  <input type="number" id="_throw">
- <label for="fate">Fate Modifier</label>
-  <input type="number" id="fate">
-   <label for="innerForce">Inner Force</label>
-  <input type="number" id="innerForce">
-  <label for="endurance">Endurance</label>
-  <input type="number" id="endurance">
-
- 
-
+      <div class="section">
+        <div class="stat-row">
+          <div class="stat-group" style="flex:0 0 auto;">
+            <label for="punch">Punch</label>
+            <input type="number" id="punch" />
+          </div>
+          <div class="stat-group" style="flex:0 0 auto;">
+            <label for="kick">Kick</label>
+            <input type="number" id="kick" />
+          </div>
+          <div class="stat-group" style="flex:0 0 auto;">
+            <label for="_throw">Throw</label>
+            <input type="number" id="_throw" />
+          </div>
+          <div class="stat-group" style="flex:0 0 auto;">
   <label for="shurikens">Shurikens</label>
-  <input type="number" id="shurikens">
+  <div style="display: flex; align-items: center; gap: 8px;">
+    <input type="number" id="shurikens" min="0" max="99" />
+    <i class="fa-regular fa-star shuriken-icon"></i>
+  </div>
+</div>
+        </div>
+      </div>
 
- 
+      <div class="section">
+        <div class="stat-row">
+          <div class="stat-group" style="flex:0 0 auto;">
+            <label for="fate">Fate Modifier</label>
+            <input type="number" id="fate" />
+          </div>
+          <div class="stat-group" style="flex:0 0 auto;">
+            <label for="innerForce">Inner Force</label>
+            <input type="number" id="innerForce" />
+          </div>
+          <div class="stat-group" style="flex:0 0 auto;">
+              <label for="endurance">Endurance</label>
+	      <input type="number" id="endurance" />
+	  </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+    
+         <div id="diceContainer">
+  <i class="fas fa-dice-six dice-icon" id="die1"></i>
+  <i class="fas fa-dice-four dice-icon" id="die2"></i>
+</div>
+<button onclick="rollBothDice()">🎲 Roll Dice</button>
 
- 
 
-  <label for="ninjatools">Ninja Tools</label>
-  <input type="text" id="ninjatools" placeholder="Comma-separated (e.g. Acrobatics, Poison)" />
+</div>
+        </div>
+      </div>
 
-  
+      <div class="section">
+        <label for="ninjatools">Ninja Tools</label>
+        <textarea id="ninjatools" placeholder="Comma-separated (e.g. Acrobatics, Poison)"></textarea>
 
-  <label for="items">Items</label>
-  <input type="text" id="items" placeholder="Comma-separated (e.g. Shuriken, Healing Potion)" />
+        <label for="items">Items</label>
+        <textarea id="items" placeholder="Comma-separated (e.g. Shuriken, Healing Potion)"></textarea>
 
-  <label for="notes">notes</label>
-  <textarea id="notes" placeholder="notes"></textarea>
+        <label for="notes">Notes</label>
+        <textarea id="notes" placeholder="Notes about your journey, o shadow-walker..."></textarea>
+      </div>
 
-  <button onclick="generateCode()">Generate Save Code</button>
-  <button onclick="loadCode()">Load from Code</button>
+      <div class="button-row">
+        <button onclick="generateCode()">Generate Save Code</button>
+        <button onclick="loadCode()">Load from Code</button>
+      </div>
 
-  <label for="saveCode">Paste Save Code Here</label>
-  <input type="text" id="saveCode">
+      <div class="section">
+        <label for="saveCode">Paste Save Code Here</label>
+        <input type="text" id="saveCode" />
+        <div class="note">Tip: Your save code is a set of four themed words. Keep it secret; keep it safe.</div>
+      </div>
 
-  <div id="codeOutput"></div>
+      <div id="codeOutput"></div>
+    </div>
+  </div>
 
   <script>
     const wordList = [
-      "silent", "shadow", "iron", "fist", "tiger", "lotus", "strike", "wind", "flame", "venom",
-      "jade", "blade", "honour", "spirit", "claw", "night", "storm", "echo", "dragon", "whisper"
+      "silent","shadow","iron","fist","tiger","lotus","strike","wind","flame","venom",
+      "jade","blade","honour","spirit","claw","night","storm","echo","dragon","whisper"
     ];
 
     function encodeToWords(data) {
@@ -145,29 +331,64 @@
       document.getElementById('codeOutput').textContent = "Save Code:\n" + code;
     }
 
+function rollFontAwesomeDie(el) {
+  el.classList.add("rolling");
+
+  setTimeout(() => {
+    const roll = Math.floor(Math.random() * 6) + 1;
+    el.className = `fas fa-dice-${["one","two","three","four","five","six"][roll - 1]} dice-icon`;
+  }, 500);
+
+  setTimeout(() => {
+    el.classList.remove("rolling");
+  }, 600);
+}
+
+function rollBothDice() {
+  const die1 = document.getElementById("die1");
+  const die2 = document.getElementById("die2");
+
+  const faces = ["one", "two", "three", "four", "five", "six"];
+
+  let rollCount = 0;
+  const maxRolls = 10;
+  const interval = setInterval(() => {
+    const temp1 = faces[Math.floor(Math.random() * 6)];
+    const temp2 = faces[Math.floor(Math.random() * 6)];
+    die1.className = `fas fa-dice-${temp1} dice-icon`;
+    die2.className = `fas fa-dice-${temp2} dice-icon`;
+    rollCount++;
+    if (rollCount >= maxRolls) {
+      clearInterval(interval);
+      const final1 = faces[Math.floor(Math.random() * 6)];
+      const final2 = faces[Math.floor(Math.random() * 6)];
+      die1.className = `fas fa-dice-${final1} dice-icon`;
+      die2.className = `fas fa-dice-${final2} dice-icon`;
+    }
+  }, 80); // Speed of face changes
+}
+
     function loadCode() {
       const code = document.getElementById('saveCode').value.trim();
       const character = decodeFromWords(code);
       if (character) {
-        document.getElementById('name').value = character.name;
-        document.getElementById('punch').value = character.punch;
-        document.getElementById('kick').value = character.kick;
-        document.getElementById('_throw').value = character._throw;
-        document.getElementById('endurance').value = character.endurance;
-        document.getElementById('innerForce').value = character.innerForce;
-        document.getElementById('shurikens').value = character.shurikens;
-        document.getElementById('fate').value = character.fate;
-        document.getElementById('location').value = character.location;
-        document.getElementById('ninjatools').value = character.ninjatools;
-        document.getElementById('items').value = character.items;
-        document.getElementById('notes').value = character.notes;
+        document.getElementById('name').value = character.name || "";
+        document.getElementById('punch').value = character.punch || "";
+        document.getElementById('kick').value = character.kick || "";
+        document.getElementById('_throw').value = character._throw || "";
+        document.getElementById('endurance').value = character.endurance || "";
+        document.getElementById('innerForce').value = character.innerForce || "";
+        document.getElementById('shurikens').value = character.shurikens || "";
+        document.getElementById('fate').value = character.fate || "";
+        document.getElementById('location').value = character.location || "";
+        document.getElementById('ninjatools').value = character.ninjatools || "";
+        document.getElementById('items').value = character.items || "";
+        document.getElementById('notes').value = character.notes || "";
         document.getElementById('codeOutput').textContent = "Character loaded from code!";
       } else {
         document.getElementById('codeOutput').textContent = "Invalid or unknown code.";
       }
     }
-    
   </script>
 </body>
 </html>
-
