@@ -6,16 +6,16 @@ body {
   padding: 30px;
   margin: 0;
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 h1 {
   color: #3b2f2f;
   font-family: 'Papyrus', fantasy;
-  font-size: 32px;
-  margin-bottom: 20px;
+  font-size: 36px;
+  margin-bottom: 24px;
   border-bottom: 2px solid #3b2f2f;
-  padding-bottom: 12px;
+  padding-bottom: 14px;
 }
 
 /* Scroll container */
@@ -29,7 +29,7 @@ h1 {
   border: 2px solid #3b2f2f;
   box-shadow: 0 10px 30px rgba(0,0,0,0.25);
   border-radius: 12px;
-  padding: 24px;
+  padding: 28px;
   overflow: hidden;
   position: relative;
 }
@@ -61,10 +61,10 @@ h1 {
 /* Form elements */
 label {
   display: block;
-  margin-top: 16px;
-  font-weight: 700;
+  margin-top: 20px;
+  font-weight: 800;
   color: #5c4438;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   letter-spacing: 0.5px;
 }
 
@@ -72,37 +72,37 @@ input[type="text"],
 input[type="number"],
 textarea {
   width: 100%;
-  padding: 14px;
-  margin-top: 8px;
+  padding: 16px;
+  margin-top: 10px;
   box-sizing: border-box;
   border: 2px solid #bfae97;
-  border-radius: 8px;
+  border-radius: 10px;
   background-color: #fffef9;
   color: #2f2a25;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-weight: 600;
 }
 
 textarea {
   resize: vertical;
-  min-height: 100px;
+  min-height: 120px;
 }
 
 /* Inline layout using inline-block */
 .stat-row {
-  margin-top: 16px;
+  margin-top: 20px;
   text-align: left;
 }
 
 .stat-group {
   display: inline-block;
   vertical-align: top;
-  margin-right: 16px;
-  margin-bottom: 16px;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 
 /* Specific widths */
-#name { width: 240px; }
+#name { width: 260px; }
 
 #location,
 #kick,
@@ -111,51 +111,51 @@ textarea {
 #fate,
 #endurance,
 #innerForce {
-  width: 80px;
+  width: 100px;
 }
 
 #shurikens {
-  width: 60px;
+  width: 80px;
 }
 
 /* Dice and icons */
 .shuriken-icon {
-  font-size: 36px;
+  font-size: 40px;
   color: black;
   transition: transform 0.2s ease;
 }
 
 .dice-icon {
-  font-size: 56px;
+  font-size: 72px;
   color: #444;
-  margin: 0 12px;
+  margin: 0 14px;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
 
 /* Dice container */
 #diceContainer {
-  margin-top: 14px;
-  margin-bottom: 14px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 /* Buttons */
 .button-row {
-  margin-top: 24px;
+  margin-top: 30px;
   text-align: center;
 }
 
 button {
-  padding: 16px 20px;
+  padding: 18px 24px;
   background-color: #3b2f2f;
   color: #fff;
   border: none;
   cursor: pointer;
-  font-weight: 700;
-  font-size: 1.1rem;
-  border-radius: 8px;
-  margin: 8px;
-  min-width: 200px;
+  font-weight: 800;
+  font-size: 1.3rem;
+  border-radius: 10px;
+  margin: 10px;
+  min-width: 220px;
 }
 
 button:hover {
@@ -164,22 +164,22 @@ button:hover {
 
 /* Output box */
 #codeOutput {
-  margin-top: 20px;
+  margin-top: 24px;
   background-color: #eee;
-  padding: 14px;
+  padding: 16px;
   font-family: monospace;
   white-space: pre-wrap;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 2px solid #d7d7d7;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 600;
 }
 
 /* Section styling */
 .section {
-  padding: 10px 0 4px;
+  padding: 12px 0 6px;
   border-top: 1px dashed #bfae97;
-  margin-top: 18px;
+  margin-top: 20px;
 }
 
 .section:first-of-type {
@@ -189,49 +189,48 @@ button:hover {
 
 .note {
   color: #6a5749;
-  font-size: 1rem;
-  margin-top: 8px;
+  font-size: 1.1rem;
+  margin-top: 10px;
   font-weight: 500;
 }
 
 /* Mobile scaling */
-@media (max-width: 1080px) {
+@media (max-width: 768px) {
   body {
     padding: 20px;
-    font-size: 20px;
+    font-size: 22px;
   }
 
   h1 {
-    font-size: 28px;
+    font-size: 30px;
   }
 
   input,
   textarea {
-    font-size: 1.2rem;
-    padding: 16px;
+    font-size: 1.4rem;
+    padding: 18px;
   }
 
   button {
-    font-size: 1.2rem;
-    padding: 18px;
+    font-size: 1.4rem;
+    padding: 20px;
     min-width: 100%;
   }
 
   .shuriken-icon {
-    font-size: 40px;
+    font-size: 48px;
   }
 
   .dice-icon {
-    font-size: 64px;
+    font-size: 80px;
   }
 
   #codeOutput {
-    font-size: 1.1rem;
-    padding: 16px;
+    font-size: 1.3rem;
+    padding: 18px;
   }
 
   .note {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
 }
-
