@@ -80,6 +80,7 @@
   color: #111;
   box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
   appearance: none;
+touch-action: manipulation;
 }
 
 
