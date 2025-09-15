@@ -18,6 +18,12 @@
 </head>
 <body>
   <div class="scroll">
+<div style="padding: 12px; display: flex; align-items: center; gap: 12px;">
+  <label for="zoomControl" style="font-weight: bold;">🧭 Interface Zoom</label>
+  <input type="range" id="zoomControl" min="100" max="200" value="100" step="10" />
+  <span id="zoomValue">100%</span>
+</div>
+
     <h1>🐅 Way of the Tiger Character Sheet...</h1>
     <div class="scroll-inner">
       <div class="stat-group" style="flex:0 0 auto;">
@@ -109,9 +115,7 @@
         <div class="note">Tip: Your save code is a set of three themed words. Keep it secret; keep it safe.</div>
       </div>
 
-      <div id="codeOutput"></div>
-<button onclick="testDropdownValues()">Test Values</button>
-    </div>
+
   </div>
 
 </body>

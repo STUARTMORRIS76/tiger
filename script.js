@@ -142,4 +142,27 @@ document.getElementById('locationValue').textContent = data.location || 1;
   alert("Character loaded");
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const zoomSlider = document.getElementById("zoomControl");
+  const zoomDisplay = document.getElementById("zoomValue");
+  const scrollContainer = document.querySelector(".scroll-inner");
+
+  zoomSlider.addEventListener("input", () => {
+    const zoom = zoomSlider.value;
+    zoomDisplay.textContent = `${zoom}%`;
+    scrollContainer.style.fontSize = `${zoom * 0.01}em`;
+  });
+
+  // Existing location slider sync
+  const locationSlider = document.getElementById("locationRange");
+  const locationDisplay = document.getElementById("locationValue");
+  locationSlider.addEventListener("input", () => {
+    locationDisplay.textContent = locationSlider.value;
+  });
+
+  // Dice click handlers
+  document.getElementById("die1").addEventListener("click", rollBothDice);
+  document.getElementById("die2").addEventListener("click", rollBothDice);
+});
+
 
