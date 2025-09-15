@@ -230,3 +230,27 @@ select,
   max-height: 300px; /* or whatever fits your layout */
   overflow-y: auto;
 }
+
+.ninja-skills label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: normal;
+  color: #3b2f2f;
+  font-size: 1.1em;
+}
+.ninja-skills input[type="checkbox"] {
+  transform: scale(1.2);
+}
+.ninja-tools label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: normal;
+  color: #3b2f2f;
+  font-size: 1.1em;
+}
+.ninja-tools input[type="checkbox"] {
+  transform: scale(1.2);
+}
+

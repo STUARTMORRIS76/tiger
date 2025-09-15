@@ -1,7 +1,7 @@
-    
 function generateCode() {
-
- 
+  // Collect checked ninja skills
+  const selectedSkills = Array.from(document.querySelectorAll('input[name="skill"]:checked'))
+    .map(cb => cb.value);
 
   const character = {
     endurance: document.getElementById("endurance").dataset.value,
@@ -9,12 +9,13 @@ function generateCode() {
     shurikens: document.getElementById('shurikens').dataset.value,
     fate: document.getElementById('fate').dataset.value,
     location: document.getElementById('locationRange').value,
-    ninjatools: document.getElementById('ninjatools').value,
+    ninjatools: Array.from(document.querySelectorAll('input[name="tool"]:checked')).map(cb => cb.value),
     punch: document.getElementById("punch").dataset.value,
     kick: document.getElementById('kick').dataset.value,
     _throw: document.getElementById('_throw').dataset.value,
     items: document.getElementById('items').value,
-    notes: document.getElementById('notes').value
+    notes: document.getElementById('notes').value,
+    skills: selectedSkills // ✅ Add ninja skills here
   };
 
   const ninjaWords = ["shadow", "flame", "lotus", "dragon", "mist", "claw", "echo", "strike", "moon", "venom"];
@@ -23,6 +24,7 @@ function generateCode() {
   localStorage.setItem(`ninja-${password}`, JSON.stringify(character));
   document.getElementById('codeOutput').textContent = password;
 }
+
 
 function rollBothDice() {
   const die1 = document.getElementById("die1");
@@ -129,15 +131,17 @@ function loadCode() {
     return;
   }
 
+  document.getElementById('locationRange').value = data.location || 1;
+  document.getElementById('locationValue').textContent = data.location || 1;
 
-document.getElementById('locationRange').value = data.location || 1;
-document.getElementById('locationValue').textContent = data.location || 1;
+document.querySelectorAll('input[name="tool"]').forEach(cb => {
+  cb.checked = Array.isArray(data.ninjatools) && data.ninjatools.includes(cb.value);
+});
 
-  document.getElementById('ninjatools').value = data.ninjatools || "";
   document.getElementById('items').value = data.items || "";
   document.getElementById('notes').value = data.notes || "";
 
-  const dropdownFields = ['punch', 'kick', '_throw','endurance','innerForce','fate','shurikens'];
+  const dropdownFields = ['punch', 'kick', '_throw', 'endurance', 'innerForce', 'fate', 'shurikens'];
   dropdownFields.forEach(id => {
     const container = document.getElementById(id);
     const value = data[id];
@@ -150,8 +154,14 @@ document.getElementById('locationValue').textContent = data.location || 1;
     }
   });
 
+  // ✅ Restore ninja skills checkboxes
+  document.querySelectorAll('input[name="skill"]').forEach(cb => {
+    cb.checked = Array.isArray(data.skills) && data.skills.includes(cb.value);
+  });
+
   alert("Character loaded");
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const zoomSlider = document.getElementById("zoomControl");
