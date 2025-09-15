@@ -227,3 +227,20 @@ button:hover {
   font-size: 0.9rem;
   margin-top: 6px;
 }
+
+.zoomable-text {
+  font-size: 1.2em;
+}
+
+.zoomable-textarea {
+  font-size: 1.2em;
+  padding: 10px;
+}
+
+input[type="text"],
+textarea,
+select,
+.dropdown-menu .dropdown-item {
+  font-size: 1.2em;
+}
+

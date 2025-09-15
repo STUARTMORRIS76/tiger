@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-function createBootstrapDropdown(id, min, max, defaultValue = "") {
+function createBootstrapDropdown2(id, min, max, defaultValue = "") {
   const container = document.getElementById(id);
   container.innerHTML = "";
 
@@ -107,6 +107,61 @@ function createBootstrapDropdown(id, min, max, defaultValue = "") {
 }
 
 
+function createBootstrapDropdown(id, min, max, defaultValue = ""){
+
+const container = document.getElementById(id);
+if (!container) {
+  console.error("Element with id \"" + id + "\" not found.");
+  return;
+}
+
+  container.innerHTML = "";
+
+  const hasDefault = defaultValue !== null && defaultValue !== undefined && defaultValue !== "";
+  container.setAttribute("data-value", hasDefault ? defaultValue : "");
+
+  // Create the dropdown toggle button
+  const button = document.createElement("button");
+  button.className = "btn btn-warning dropdown-toggle zoomable-text";
+  
+
+  button.type = "button";
+  button.setAttribute("data-bs-toggle", "dropdown");
+  button.setAttribute("aria-expanded", "false");
+
+  const displayValue = hasDefault ? defaultValue : "--";
+  button.innerHTML = `<span id="${id}Value" class="zoomable-text">${displayValue}</span>`;
+
+
+  
+
+  // Create the dropdown menu
+  const ul = document.createElement("ul");
+  ul.className = "dropdown-menu zoomable-dropdown";
+
+  for (let i = min; i <= max; i++) {
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.className = "dropdown-item zoomable-text";
+    a.href = "#";
+    a.textContent = i;
+    a.onclick = function (e) {
+      e.preventDefault();
+      document.getElementById(`${id}Value`).textContent = i;
+      container.setAttribute("data-value", i);
+    };
+    li.appendChild(a);
+    ul.appendChild(li);
+  }
+
+  // Wrap button and menu in a dropdown container
+  const dropdownDiv = document.createElement("div");
+  dropdownDiv.className = "dropdown";
+  dropdownDiv.appendChild(button);
+  dropdownDiv.appendChild(ul);
+
+  container.appendChild(dropdownDiv);
+}
 
 
 function loadCode() {

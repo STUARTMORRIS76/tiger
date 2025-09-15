@@ -94,13 +94,13 @@
 
       <div class="section">
         <label for="ninjatools">Ninja Tools</label>
-        <textarea id="ninjatools" placeholder="Comma-separated (e.g. Acrobatics, Poison)"></textarea>
+        <textarea id="ninjatools" class="form-control zoomable-text" placeholder="Comma-separated (e.g. Acrobatics, Poison)"></textarea>
 
         <label for="items">Items</label>
-        <textarea id="items" placeholder="Comma-separated (e.g. Shuriken, Healing Potion)"></textarea>
+        <textarea id="items" class="form-control zoomable-text" placeholder="Comma-separated (e.g. Shuriken, Healing Potion)"></textarea>
 
         <label for="notes">Notes</label>
-        <textarea id="notes" placeholder="Notes about your journey, o shadow-walker..."></textarea>
+        <textarea id="notes" class="form-control zoomable-text" placeholder="Notes about your journey, o shadow-walker..."></textarea>
       </div>
 
       <div class="button-row">
@@ -110,7 +110,7 @@
 
       <div class="section">
         <label for="saveCode">Paste Save Code Here</label>
-        <input type="text" id="saveCode" />
+        <input type="text" id="saveCode" class="form-control zoomable-text" />
         <div class="note">Tip: Your save code is a set of three themed words. Keep it secret; keep it safe.</div>
       </div>
 
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
   createBootstrapDropdown("shurikens", 1, 10, 5);
   createBootstrapDropdown("fate", -5, 5, 0);
   createBootstrapDropdown("innerForce", 1, 10, 5);
-  createBootstrapDropdown("location", 1, 440, 1);
+  
 });
 document.addEventListener("DOMContentLoaded", () => {
   const locationSlider = document.getElementById("locationRange");
@@ -138,5 +138,47 @@ document.addEventListener("DOMContentLoaded", () => {
     locationDisplay.textContent = locationSlider.value;
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const zoomSlider = document.getElementById("zoomControl");
+  const zoomDisplay = document.getElementById("zoomValue");
+  const scrollContainer = document.querySelector(".scroll-inner");
+  const zoomableText = document.querySelectorAll(".zoomable-text");
+  const diceIcons = document.querySelectorAll(".zoomable-dice");
+  const locationSlider = document.querySelector(".zoomable-slider");
+
+  zoomSlider.addEventListener("input", () => {
+    const zoom = parseInt(zoomSlider.value);
+    zoomDisplay.textContent = `${zoom}%`;
+
+    scrollContainer.style.fontSize = `${zoom * 0.01}em`;
+
+    zoomableText.forEach(el => {
+      el.style.fontSize = `${zoom * 0.012}em`;
+    });
+
+    diceIcons.forEach(die => {
+      die.style.fontSize = `${zoom * 0.6}px`;
+    });
+
+    locationSlider.style.width = `${zoom * 3.6}px`;
+    locationSlider.style.height = `${zoom * 0.28}px`;
+
+    // Scale dropdown menu items
+    const dropdownItems = document.querySelectorAll(".dropdown-item");
+    dropdownItems.forEach(item => {
+      item.style.fontSize = `${zoom * 0.012}em`;
+      item.style.padding = `${zoom * 0.08}px ${zoom * 0.16}px`;
+    });
+
+    // Scale dropdown buttons
+    const zoomableButtons = document.querySelectorAll(".btn.dropdown-toggle");
+    zoomableButtons.forEach(btn => {
+      btn.style.fontSize = `${zoom * 0.008}em`;
+      btn.style.padding = `${zoom * 0.08}px ${zoom * 0.16}px`;
+    });
+  });
+});
+
 </script>
 </html>
