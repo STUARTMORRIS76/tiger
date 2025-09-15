@@ -5,13 +5,20 @@
 
   <meta charset="UTF-8" />
   <title>Way of the Tiger Character Sheet</title>
-  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <link rel="stylesheet" href="styles.css">
-  
+<script src="ninjawords.js"></script>
+<script src="script.js"></script>
+
+  <script>
+  </script>  
 </head>
 <body>
   <div class="scroll">
-    <h1>🐅 Way of the Tiger Character Sheet</h1>
+    <h1>🐅 Way of the Tiger Character Sheet...</h1>
     <div class="scroll-inner">
       <div class="section">
         <div class="stat-row">
@@ -21,8 +28,7 @@
           </div>
           <div class="stat-group" style="flex:0 0 auto;">
             <label for="location">Current Location</label>
-            <select id="location" class="chunky-dropdown"></select>
-
+            <div id="location" class="dropdown"></div>
           </div>
         </div>
       </div>
@@ -32,22 +38,24 @@
           <div class="stat-group" style="flex:0 0 auto;">
             <label for="punch">Punch</label>
      
-	<select id="punch" class="chunky-dropdown"></select>
+	<div id="punch" class="dropdown"></div>
+
           </div>
           <div class="stat-group" style="flex:0 0 auto;">
             <label for="kick">Kick</label>
-            <select id="kick" class="chunky-dropdown"></select>
+            <div id="kick" class="dropdown"></div>
 
           </div>
           <div class="stat-group" style="flex:0 0 auto;">
             <label for="_throw">Throw</label>
-            <select id="_throw" class="chunky-dropdown"></select>
+		<div id="_throw" class="dropdown"></div>
 
           </div>
           <div class="stat-group" style="flex:0 0 auto;">
   <label for="shurikens">Shurikens</label>
   <div style="display: flex; align-items: center; gap: 8px;">
-    <select id="shurikens" class="chunky-dropdown"></select>
+    <div id="shurikens" class="dropdown"></div>
+
     <i class="fa-regular fa-star shuriken-icon"></i>
   </div>
 </div>
@@ -58,16 +66,15 @@
         <div class="stat-row">
           <div class="stat-group" style="flex:0 0 auto;">
             <label for="fate">Fate Modifier</label>
-            <select id="fate" class="chunky-dropdown"></select>
-
+            <div id="fate" class="dropdown"></div>
           </div>
           <div class="stat-group" style="flex:0 0 auto;">
             <label for="innerForce">Inner Force</label>
-            <select id="innerForce" class="chunky-dropdown"></select>
+            <div id="innerForce" class="dropdown"></div>
           </div>
           <div class="stat-group" style="flex:0 0 auto;">
               <label for="endurance">Endurance</label>
-	      <select id="endurance" class="chunky-dropdown"></select>
+	      <div id="endurance" class="dropdown"></div>
 	  </div>
           <div style="display: flex; align-items: center; gap: 8px;">
     
@@ -101,134 +108,27 @@
       <div class="section">
         <label for="saveCode">Paste Save Code Here</label>
         <input type="text" id="saveCode" />
-        <div class="note">Tip: Your save code is a set of four themed words. Keep it secret; keep it safe.</div>
+        <div class="note">Tip: Your save code is a set of three themed words. Keep it secret; keep it safe.</div>
       </div>
 
       <div id="codeOutput"></div>
+<button onclick="testDropdownValues()">Test Values</button>
     </div>
   </div>
 
-  <script>
-    const wordList = [
-      "silent","shadow","iron","fist","tiger","lotus","strike","wind","flame","venom",
-      "jade","blade","honour","spirit","claw","night","storm","echo","dragon","whisper"
-    ];
-
-    function encodeToWords(data) {
-      const json = JSON.stringify(data);
-      let hash = 0;
-      for (let i = 0; i < json.length; i++) {
-        hash = (hash << 5) - hash + json.charCodeAt(i);
-        hash |= 0;
-      }
-      const words = [];
-      for (let i = 0; i < 4; i++) {
-        const index = Math.abs((hash >> (i * 8)) & 0xff) % wordList.length;
-        words.push(wordList[index]);
-      }
-      return words.join("-");
-    }
-
-    function decodeFromWords(code) {
-      const saved = localStorage.getItem(code);
-      return saved ? JSON.parse(saved) : null;
-    }
-
-    function generateCode() {
-  const character = {
-    name: document.getElementById('name').value,
-    endurance: document.getElementById('endurance').value,
-    innerForce: document.getElementById('innerForce').value,
-    shurikens: document.getElementById('shurikens').value,
-    fate: document.getElementById('fate').value,
-    location: document.getElementById('location').value,
-    ninjatools: document.getElementById('ninjatools').value,
-    punch: document.getElementById('punch').value,
-    kick: document.getElementById('kick').value,
-    _throw: document.getElementById('_throw').value,
-    items: document.getElementById('items').value,
-    notes: document.getElementById('notes').value
-  };
-
-  const code = encodeToWords(character);
-  localStorage.setItem(code, JSON.stringify(character));
-  document.getElementById('codeOutput').textContent = "Save Code:\n" + code;
-}
-
-function rollBothDice() {
-  const die1 = document.getElementById("die1");
-  const die2 = document.getElementById("die2");
-
-  const faces = ["one", "two", "three", "four", "five", "six"];
-
-  let rollCount = 0;
-  const maxRolls = 10;
-  const interval = setInterval(() => {
-    const temp1 = faces[Math.floor(Math.random() * 6)];
-    const temp2 = faces[Math.floor(Math.random() * 6)];
-    die1.className = `fas fa-dice-${temp1} dice-icon`;
-    die2.className = `fas fa-dice-${temp2} dice-icon`;
-    rollCount++;
-    if (rollCount >= maxRolls) {
-      clearInterval(interval);
-      const final1 = faces[Math.floor(Math.random() * 6)];
-      const final2 = faces[Math.floor(Math.random() * 6)];
-      die1.className = `fas fa-dice-${final1} dice-icon`;
-      die2.className = `fas fa-dice-${final2} dice-icon`;
-    }
-  }, 80); // Speed of face changes
-}
-
-
-function createDropdown(id, min, max, defaultValue = "") {
-  const select = document.getElementById(id);
-  select.innerHTML = "";
-
-  const defaultOption = document.createElement("option");
-  defaultOption.value = "";
-  defaultOption.textContent = "--";
-  select.appendChild(defaultOption);
-
-  for (let i = min; i <= max; i++) {
-    const option = document.createElement("option");
-    option.value = i;
-    option.textContent = i;
-    if (String(i) === String(defaultValue)) {
-      option.selected = true;
-    }
-    select.appendChild(option);
-  }
-}
-createDropdown("location", 1, 430,1);
-  createDropdown("punch", -5, 5,0);
-createDropdown("kick", -5, 5,0);
-createDropdown("_throw", -5, 5,0);
-createDropdown("shurikens", 0, 9,5);
-createDropdown("fate", -5, 5,0);
-createDropdown("innerForce", -5, 10,5);
-createDropdown("endurance", 0, 20,20);
-
-    function loadCode() {
-      const code = document.getElementById('saveCode').value.trim();
-      const character = decodeFromWords(code);
-      if (character) {
-        document.getElementById('name').value = character.name || "";
-        document.getElementById('punch').value = character.punch || "";
-        document.getElementById('kick').value = character.kick || "";
-        document.getElementById('_throw').value = character._throw || "";
-        document.getElementById('endurance').value = character.endurance || "";
-        document.getElementById('innerForce').value = character.innerForce || "";
-        document.getElementById('shurikens').value = character.shurikens || "";
-        document.getElementById('fate').value = character.fate || "";
-        document.getElementById('location').value = character.location || "";
-        document.getElementById('ninjatools').value = character.ninjatools || "";
-        document.getElementById('items').value = character.items || "";
-        document.getElementById('notes').value = character.notes || "";
-        document.getElementById('codeOutput').textContent = "Character loaded from code!";
-      } else {
-        document.getElementById('codeOutput').textContent = "Invalid or unknown code.";
-      }
-    }
-  </script>
 </body>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  createBootstrapDropdown("endurance", 0, 20, 20);
+  createBootstrapDropdown("punch", -5, 5, 0);
+  createBootstrapDropdown("kick", -5, 5, 0);
+  createBootstrapDropdown("_throw", -5, 5, 0);
+  createBootstrapDropdown("shurikens", 1, 10, 5);
+  createBootstrapDropdown("fate", -5, 5, 0);
+  createBootstrapDropdown("innerForce", 1, 10, 5);
+  createBootstrapDropdown("location", 1, 440, 1);
+});
+
+</script>
 </html>

@@ -68,21 +68,37 @@
 
 /* Icon styles */
 
-
-.chunky-dropdown {
-  font-size: 1.3rem;
-  font-weight: 600;
-  padding: 4px 6px;
-  border: 2px solid #333;
-  border-radius: 8px;
-  width: 100px;
-  background-color: #fff;
-  color: #111;
-  box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
-  appearance: none;
-touch-action: manipulation;
+.dropdown .btn {
+  width: auto;
+  min-width: 60px;         /* Enough for 2-digit numbers */
+  padding: 6px 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
 }
 
+.dropdown-menu {
+  min-width: 60px;
+}
+
+.dropdown .btn span {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+.dropdown .btn {
+  width: auto;
+  min-width: 60px;
+  padding-right: 2.5rem; /* Extra space for the arrow */
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
 
 .shuriken-icon {
