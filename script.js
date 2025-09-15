@@ -1,7 +1,6 @@
     
 function generateCode() {
   const character = {
-    name: document.getElementById('name').value,
     endurance: document.getElementById("endurance").dataset.value,
     innerForce: document.getElementById('innerForce').dataset.value,
     shurikens: document.getElementById('shurikens').dataset.value,
@@ -107,7 +106,6 @@ function loadCode() {
     return;
   }
 
-  document.getElementById('name').value = data.name || "";
   document.getElementById('ninjatools').value = data.ninjatools || "";
   document.getElementById('items').value = data.items || "";
   document.getElementById('notes').value = data.notes || "";
