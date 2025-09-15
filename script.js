@@ -1,5 +1,8 @@
     
 function generateCode() {
+
+ 
+
   const character = {
     endurance: document.getElementById("endurance").dataset.value,
     innerForce: document.getElementById('innerForce').dataset.value,

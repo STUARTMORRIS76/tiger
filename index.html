@@ -104,6 +104,7 @@
         <input type="text" id="saveCode" class="form-control zoomable-text" />
         <div class="note">Tip: Your save code is a set of three themed words. Keep it secret; keep it safe.</div>
       </div>
+      <div id="codeOutput"></div>
 
 
   </div>
@@ -171,6 +172,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const fontSize = baseFont + (zoom) * 0.002; // subtle growth
   const width = baseWidth + (zoom  * 0.06);      // gentle width increase
+  //console.log(btn.span.id);
+  // Make the endurance button twice as wide
+
+  const span = btn.querySelector("span");
+  if (span && span.id === "enduranceValue") {
+    width *= 2;
+  }
 
   btn.style.fontSize = `${fontSize}em`;
   btn.style.width = `${width}px`;
