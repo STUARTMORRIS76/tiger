@@ -244,3 +244,8 @@ select,
   font-size: 1.2em;
 }
 
+/* Remove dropdown arrow from Bootstrap buttons */
+.btn.dropdown-toggle::after {
+  display: none !important;
+}
+

@@ -57,55 +57,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-function createBootstrapDropdown2(id, min, max, defaultValue = "") {
-  const container = document.getElementById(id);
-  container.innerHTML = "";
-
-  // Determine if defaultValue is explicitly set (including 0)
-  const hasDefault = defaultValue !== null && defaultValue !== undefined && defaultValue !== "";
-
-  // Set initial data-value
-  container.setAttribute("data-value", hasDefault ? defaultValue : "");
-
-  // Create the dropdown toggle button
-  const button = document.createElement("button");
-  button.className = "btn btn-warning dropdown-toggle";
-  button.type = "button";
-  button.setAttribute("data-bs-toggle", "dropdown");
-  button.setAttribute("aria-expanded", "false");
-
-  const displayValue = hasDefault ? defaultValue : "--";
-  button.innerHTML = `<span id="${id}Value">${displayValue}</span>`;
-
-  // Create the dropdown menu
-  const ul = document.createElement("ul");
-  ul.className = "dropdown-menu";
-
-  for (let i = min; i <= max; i++) {
-    const li = document.createElement("li");
-    const a = document.createElement("a");
-    a.className = "dropdown-item";
-    a.href = "#";
-    a.textContent = i;
-    a.onclick = function (e) {
-      e.preventDefault(); // Prevent page jump
-      document.getElementById(`${id}Value`).textContent = i;
-      container.setAttribute("data-value", i); // Store value for later use
-    };
-    li.appendChild(a);
-    ul.appendChild(li);
-  }
-
-  // Wrap button and menu in a dropdown container
-  const dropdownDiv = document.createElement("div");
-  dropdownDiv.className = "dropdown";
-  dropdownDiv.appendChild(button);
-  dropdownDiv.appendChild(ul);
-
-  // Append to the target container
-  container.appendChild(dropdownDiv);
-}
-
 
 function createBootstrapDropdown(id, min, max, defaultValue = ""){
 
@@ -122,8 +73,10 @@ if (!container) {
 
   // Create the dropdown toggle button
   const button = document.createElement("button");
-  button.className = "btn btn-warning dropdown-toggle zoomable-text";
-  
+  button.className = "btn btn-warning dropdown-toggle zoomable-button zoomable-text";
+  button.style.fontSize = "1.4em"; // Larger base size
+  button.style.width = "240px";    // Wider base width
+  button.style.padding = "10px 20px"; // Comfortable padding
 
   button.type = "button";
   button.setAttribute("data-bs-toggle", "dropdown");

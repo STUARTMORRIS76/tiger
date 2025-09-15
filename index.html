@@ -42,55 +42,46 @@
 
 
 
-      <div class="section">
-        <div class="stat-row">
-          <div class="stat-group" style="flex:0 0 auto;">
-            <label for="punch">Punch</label>
-     
-	<div id="punch" class="dropdown"></div>
-
-          </div>
-          <div class="stat-group" style="flex:0 0 auto;">
-            <label for="kick">Kick</label>
-            <div id="kick" class="dropdown"></div>
-
-          </div>
-          <div class="stat-group" style="flex:0 0 auto;">
-            <label for="_throw">Throw</label>
-		<div id="_throw" class="dropdown"></div>
-
-          </div>
-          <div class="stat-group" style="flex:0 0 auto;">
-  <label for="shurikens">Shurikens</label>
-  <div style="display: flex; align-items: center; gap: 8px;">
-    <div id="shurikens" class="dropdown"></div>
-
-    
+     <div class="section">
+  <label>Punch / Kick / Throw / Shurikens</label>
+  <div class="dropdown-row" style="display: flex; flex-wrap: wrap; gap: 16px;">
+    <div class="stat-group">
+      <label for="punch">Punch</label>
+      <div id="punch" class="dropdown"></div>
+    </div>
+    <div class="stat-group">
+      <label for="kick">Kick</label>
+      <div id="kick" class="dropdown"></div>
+    </div>
+    <div class="stat-group">
+      <label for="_throw">Throw</label>
+      <div id="_throw" class="dropdown"></div>
+    </div>
+    <div class="stat-group">
+      <label for="shurikens">Shurikens</label>
+      <div id="shurikens" class="dropdown"></div>
+    </div>
   </div>
 </div>
-        </div>
-      </div>
 
-      <div class="section">
-        <div class="stat-row">
-          <div class="stat-group" style="flex:0 0 auto;">
-            <label for="fate">Fate Modifier</label>
-            <div id="fate" class="dropdown"></div>
-          </div>
-          <div class="stat-group" style="flex:0 0 auto;">
-            <label for="innerForce">Inner Force</label>
-            <div id="innerForce" class="dropdown"></div>
-          </div>
-          <div class="stat-group" style="flex:0 0 auto;">
-              <label for="endurance">Endurance</label>
-	      <div id="endurance" class="dropdown"></div>
-	  </div>
-          
-
-
+<div class="section">
+  <label>Fate / Inner Force / Endurance</label>
+  <div class="dropdown-row" style="display: flex; flex-wrap: wrap; gap: 16px;">
+    <div class="stat-group">
+      <label for="fate">Fate Modifier</label>
+      <div id="fate" class="dropdown"></div>
+    </div>
+    <div class="stat-group">
+      <label for="innerForce">Inner Force</label>
+      <div id="innerForce" class="dropdown"></div>
+    </div>
+    <div class="stat-group">
+      <label for="endurance">Endurance</label>
+      <div id="endurance" class="dropdown"></div>
+    </div>
+  </div>
 </div>
-        </div>
-      </div>
+
 
       <div class="section">
         <label for="ninjatools">Ninja Tools</label>
@@ -172,11 +163,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Scale dropdown buttons
-    const zoomableButtons = document.querySelectorAll(".btn.dropdown-toggle");
+    //const zoomableButtons = document.querySelectorAll(".btn.dropdown-toggle");
+    const zoomableButtons = document.querySelectorAll(".zoomable-button");
     zoomableButtons.forEach(btn => {
-      btn.style.fontSize = `${zoom * 0.008}em`;
-      btn.style.padding = `${zoom * 0.08}px ${zoom * 0.16}px`;
-    });
+  const baseFont = 1.2; // matches initial fontSize in em
+  const baseWidth = 90; // matches initial width in px
+
+  const fontSize = baseFont + (zoom) * 0.002; // subtle growth
+  const width = baseWidth + (zoom  * 0.06);      // gentle width increase
+
+  btn.style.fontSize = `${fontSize}em`;
+  btn.style.width = `${width}px`;
+  btn.style.padding = `${zoom * 0.08}px ${zoom * 0.16}px`;
+});
   });
 });
 
