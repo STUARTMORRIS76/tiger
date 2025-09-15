@@ -5,7 +5,7 @@ function generateCode() {
     innerForce: document.getElementById('innerForce').dataset.value,
     shurikens: document.getElementById('shurikens').dataset.value,
     fate: document.getElementById('fate').dataset.value,
-    location: document.getElementById('location').dataset.value,
+    location: document.getElementById('locationRange').value,
     ninjatools: document.getElementById('ninjatools').value,
     punch: document.getElementById("punch").dataset.value,
     kick: document.getElementById('kick').dataset.value,
@@ -42,8 +42,20 @@ function rollBothDice() {
       die1.className = `fas fa-dice-${final1} dice-icon`;
       die2.className = `fas fa-dice-${final2} dice-icon`;
     }
-  }, 80); // Speed of face changes
+  }, 80);
 }
+
+// Make dice clickable
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("die1").addEventListener("click", rollBothDice);
+  document.getElementById("die2").addEventListener("click", rollBothDice);
+
+  const locationSlider = document.getElementById("locationRange");
+  const locationDisplay = document.getElementById("locationValue");
+  locationSlider.addEventListener("input", () => {
+    locationDisplay.textContent = locationSlider.value;
+  });
+});
 
 function createBootstrapDropdown(id, min, max, defaultValue = "") {
   const container = document.getElementById(id);
@@ -106,11 +118,15 @@ function loadCode() {
     return;
   }
 
+
+document.getElementById('locationRange').value = data.location || 1;
+document.getElementById('locationValue').textContent = data.location || 1;
+
   document.getElementById('ninjatools').value = data.ninjatools || "";
   document.getElementById('items').value = data.items || "";
   document.getElementById('notes').value = data.notes || "";
 
-  const dropdownFields = ['punch', 'kick', '_throw','endurance','innerForce','fate','location','shurikens'];
+  const dropdownFields = ['punch', 'kick', '_throw','endurance','innerForce','fate','shurikens'];
   dropdownFields.forEach(id => {
     const container = document.getElementById(id);
     const value = data[id];

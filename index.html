@@ -20,15 +20,22 @@
   <div class="scroll">
     <h1>🐅 Way of the Tiger Character Sheet...</h1>
     <div class="scroll-inner">
-      <div class="section">
-        <div class="stat-row">
-       
-          <div class="stat-group" style="flex:0 0 auto;">
-            <label for="location">Current Location</label>
-            <div id="location" class="dropdown"></div>
-          </div>
-        </div>
-      </div>
+      <div class="stat-group" style="flex:0 0 auto;">
+  <label for="locationRange" style="font-size: 1.2em;">Current Location</label>
+  <div style="display: flex; align-items: center; gap: 16px;">
+    <input type="range" id="locationRange" min="1" max="440" value="1"
+           style="width: 300px; height: 24px;" />
+    <span id="locationValue" style="font-size: 1.5em; font-weight: bold;">1</span>
+  </div>
+
+
+<!-- Dice on next line -->
+<div style="margin-top: 20px; display: flex; gap: 40px; justify-content: flex-start;">
+  <i class="fas fa-dice-six dice-icon" id="die1"
+     style="font-size: 64px; cursor: pointer; color: #f39c12;"></i>
+  <i class="fas fa-dice-four dice-icon" id="die2"
+     style="font-size: 64px; cursor: pointer; color: #f39c12;"></i>
+</div>
 
       <div class="section">
         <div class="stat-row">
@@ -53,7 +60,7 @@
   <div style="display: flex; align-items: center; gap: 8px;">
     <div id="shurikens" class="dropdown"></div>
 
-    <i class="fa-regular fa-star shuriken-icon"></i>
+    
   </div>
 </div>
         </div>
@@ -73,13 +80,7 @@
               <label for="endurance">Endurance</label>
 	      <div id="endurance" class="dropdown"></div>
 	  </div>
-          <div style="display: flex; align-items: center; gap: 8px;">
-    
-         <div id="diceContainer">
-  <i class="fas fa-dice-six dice-icon" id="die1"></i>
-  <i class="fas fa-dice-four dice-icon" id="die2"></i>
-</div>
-<button onclick="rollBothDice()">🎲 Roll Dice</button>
+          
 
 
 </div>
@@ -126,6 +127,13 @@ document.addEventListener("DOMContentLoaded", () => {
   createBootstrapDropdown("innerForce", 1, 10, 5);
   createBootstrapDropdown("location", 1, 440, 1);
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const locationSlider = document.getElementById("locationRange");
+  const locationDisplay = document.getElementById("locationValue");
 
+  locationSlider.addEventListener("input", () => {
+    locationDisplay.textContent = locationSlider.value;
+  });
+});
 </script>
 </html>
