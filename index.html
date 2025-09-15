@@ -20,7 +20,7 @@
   <div class="scroll">
 <div style="padding: 12px; display: flex; align-items: center; gap: 12px;">
   <label for="zoomControl" style="font-weight: bold;">🧭 Interface Zoom</label>
-  <input type="range" id="zoomControl" min="100" max="200" value="100" step="10" />
+  <input type="range" id="zoomControl" min="100" max="300" value="100"  style="width: 420px; height: 34px;" step="10" />
   <span id="zoomValue">100%</span>
 </div>
 
@@ -29,19 +29,18 @@
       <div class="stat-group" style="flex:0 0 auto;">
   <label for="locationRange" style="font-size: 1.2em;">Current Location</label>
   <div style="display: flex; align-items: center; gap: 16px;">
-    <input type="range" id="locationRange" min="1" max="440" value="1"
-           style="width: 300px; height: 24px;" />
-    <span id="locationValue" style="font-size: 1.5em; font-weight: bold;">1</span>
+    <input type="range" id="locationRange" class="zoomable-slider" min="1" max="440" value="1"
+       style="width: 420px; height: 34px;" /><span id="locationValue" style="font-size: 1.5em; font-weight: bold;">1</span>
   </div>
 
 
 <!-- Dice on next line -->
 <div style="margin-top: 20px; display: flex; gap: 40px; justify-content: flex-start;">
-  <i class="fas fa-dice-six dice-icon" id="die1"
-     style="font-size: 64px; cursor: pointer; color: #f39c12;"></i>
-  <i class="fas fa-dice-four dice-icon" id="die2"
-     style="font-size: 64px; cursor: pointer; color: #f39c12;"></i>
+  <i class="fas fa-dice-six dice-icon zoomable-dice" id="die1" style="font-size: 64px; cursor: pointer; color: #f39c12;"></i>
+  <i class="fas fa-dice-four dice-icon zoomable-dice" id="die2" style="font-size: 64px; cursor: pointer; color: #f39c12;"></i>
 </div>
+
+
 
       <div class="section">
         <div class="stat-row">

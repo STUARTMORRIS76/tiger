@@ -146,23 +146,35 @@ document.addEventListener("DOMContentLoaded", () => {
   const zoomSlider = document.getElementById("zoomControl");
   const zoomDisplay = document.getElementById("zoomValue");
   const scrollContainer = document.querySelector(".scroll-inner");
+  const diceIcons = document.querySelectorAll(".zoomable-dice");
+  const zoomableSlider = document.querySelector(".zoomable-slider");
 
   zoomSlider.addEventListener("input", () => {
     const zoom = zoomSlider.value;
     zoomDisplay.textContent = `${zoom}%`;
-    scrollContainer.style.fontSize = `${zoom * 0.01}em`;
-  });
 
-  // Existing location slider sync
-  const locationSlider = document.getElementById("locationRange");
-  const locationDisplay = document.getElementById("locationValue");
-  locationSlider.addEventListener("input", () => {
-    locationDisplay.textContent = locationSlider.value;
+    // Scale text and controls
+    scrollContainer.style.fontSize = `${zoom * 0.01}em`;
+
+    // Scale dice icons
+    diceIcons.forEach(die => {
+      die.style.fontSize = `${zoom * 0.6}px`;
+    });
+
+    // Scale location slider
+    zoomableSlider.style.width = `${zoom * 3.6}px`;  // base width = 360px
+    zoomableSlider.style.height = `${zoom * 0.28}px`; // base height = 28px
   });
 
   // Dice click handlers
   document.getElementById("die1").addEventListener("click", rollBothDice);
   document.getElementById("die2").addEventListener("click", rollBothDice);
-});
 
+  // Location slider sync
+  const locationSlider = document.getElementById("locationRange");
+  const locationDisplay = document.getElementById("locationValue");
+  locationSlider.addEventListener("input", () => {
+    locationDisplay.textContent = locationSlider.value;
+  });
+});
 
