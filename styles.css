@@ -1,27 +1,127 @@
-/* Base styling */
+/* Responsive layout tweaks */
+@media (max-width: 1080px) {
+  body {
+    padding: 16px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  h1 {
+    font-size: 22px;
+    padding-bottom: 6px;
+  }
+
+  .scroll {
+    max-width: 100%;
+  }
+
+  .scroll-inner {
+    padding: 16px;
+  }
+
+  .stat-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .stat-group {
+    min-width: 100%;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    font-size: 1rem;
+  }
+
+  button {
+    min-width: unset;
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .button-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #diceContainer {
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+
+  .dice-icon {
+    font-size: 32px;
+  }
+
+  .section {
+    padding: 6px 0;
+  }
+
+  .note {
+    font-size: 0.85rem;
+  }
+}
+
+
+
+/* Icon styles */
+
+
+.chunky-dropdown {
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding: 4px 6px;
+  border: 2px solid #333;
+  border-radius: 8px;
+  width: 100px;
+  background-color: #fff;
+  color: #111;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+  appearance: none;
+}
+
+
+
+.shuriken-icon {
+  font-size: 28px;
+  color: black; /* silver star */
+  transition: transform 0.2s ease;
+}
+
+.dice-icon {
+  font-size: 40px;
+  color: #444;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+/* Page and scroll aesthetic */
 body {
   font-family: 'Segoe UI', sans-serif;
   background: url('https://www.transparenttextures.com/patterns/paper-fibers.png') repeat;
   background-color: #f5ecd7;
   padding: 30px;
   margin: 0;
-  text-align: center;
-  font-size: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 h1 {
+  text-align: center;
   color: #3b2f2f;
   font-family: 'Papyrus', fantasy;
-  font-size: 36px;
-  margin-bottom: 24px;
+  font-size: 28px;
+  margin: 0 0 16px 0;
   border-bottom: 2px solid #3b2f2f;
-  padding-bottom: 14px;
+  padding-bottom: 10px;
 }
 
-/* Scroll container */
 .scroll {
   max-width: 760px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .scroll-inner {
@@ -29,12 +129,11 @@ h1 {
   border: 2px solid #3b2f2f;
   box-shadow: 0 10px 30px rgba(0,0,0,0.25);
   border-radius: 12px;
-  padding: 28px;
-  overflow: hidden;
   position: relative;
+  padding: 20px;
+  overflow: hidden;
 }
 
-/* Decorative scroll ends */
 .scroll-inner::before,
 .scroll-inner::after {
   content: "";
@@ -58,51 +157,49 @@ h1 {
   border-bottom-right-radius: 12px;
 }
 
-/* Form elements */
+/* Form basics */
 label {
   display: block;
-  margin-top: 20px;
-  font-weight: 800;
+  margin-top: 10px;
+  font-weight: bold;
   color: #5c4438;
-  font-size: 1.3rem;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.25px;
 }
 
 input[type="text"],
 input[type="number"],
 textarea {
   width: 100%;
-  padding: 16px;
-  margin-top: 10px;
+  padding: 8px;
+  margin-top: 5px;
   box-sizing: border-box;
-  border: 2px solid #bfae97;
-  border-radius: 10px;
+  border: 1px solid #bfae97;
+  border-radius: 6px;
   background-color: #fffef9;
   color: #2f2a25;
-  font-size: 1.3rem;
-  font-weight: 600;
 }
 
 textarea {
   resize: vertical;
-  min-height: 120px;
+  min-height: 80px;
 }
 
-/* Inline layout using inline-block */
+/* Layout rows */
 .stat-row {
-  margin-top: 20px;
-  text-align: left;
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+  align-items: flex-end;
+  flex-wrap: wrap;
 }
 
 .stat-group {
-  display: inline-block;
-  vertical-align: top;
-  margin-right: 20px;
-  margin-bottom: 20px;
+  flex: 1;
+  min-width: 120px;
 }
 
 /* Specific widths */
-#name { width: 260px; }
+#name { width: 220px; }
 
 #location,
 #kick,
@@ -111,51 +208,38 @@ textarea {
 #fate,
 #endurance,
 #innerForce {
-  width: 100px;
+  width: 60px;
 }
 
 #shurikens {
-  width: 80px;
+  width: 40px;
 }
 
-/* Dice and icons */
-.shuriken-icon {
-  font-size: 40px;
-  color: black;
-  transition: transform 0.2s ease;
-}
-
-.dice-icon {
-  font-size: 72px;
-  color: #444;
-  margin: 0 14px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-/* Dice container */
-#diceContainer {
-  margin-top: 20px;
-  margin-bottom: 20px;
+#ninjatools,
+#items {
+  min-height: 60px;
+  font-size: 1rem;
+  line-height: 1.3;
 }
 
 /* Buttons */
 .button-row {
-  margin-top: 30px;
-  text-align: center;
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
 }
 
 button {
-  padding: 18px 24px;
+  flex: 1;
+  padding: 10px 12px;
   background-color: #3b2f2f;
   color: #fff;
   border: none;
   cursor: pointer;
-  font-weight: 800;
-  font-size: 1.3rem;
-  border-radius: 10px;
-  margin: 10px;
-  min-width: 220px;
+  font-weight: bold;
+  border-radius: 6px;
+  min-width: 160px;
 }
 
 button:hover {
@@ -164,22 +248,20 @@ button:hover {
 
 /* Output box */
 #codeOutput {
-  margin-top: 24px;
+  margin-top: 15px;
   background-color: #eee;
-  padding: 16px;
+  padding: 10px;
   font-family: monospace;
   white-space: pre-wrap;
-  border-radius: 10px;
-  border: 2px solid #d7d7d7;
-  font-size: 1.2rem;
-  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid #d7d7d7;
 }
 
-/* Section styling */
+/* Section dividers */
 .section {
-  padding: 12px 0 6px;
+  padding: 8px 0 2px;
   border-top: 1px dashed #bfae97;
-  margin-top: 20px;
+  margin-top: 14px;
 }
 
 .section:first-of-type {
@@ -189,9 +271,6 @@ button:hover {
 
 .note {
   color: #6a5749;
-  font-size: 1.1rem;
-  margin-top: 10px;
-  font-weight: 500;
+  font-size: 0.9rem;
+  margin-top: 6px;
 }
-
-

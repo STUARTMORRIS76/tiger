@@ -21,7 +21,8 @@
           </div>
           <div class="stat-group" style="flex:0 0 auto;">
             <label for="location">Current Location</label>
-            <input type="number" id="location" />
+            <select id="location" class="chunky-dropdown"></select>
+
           </div>
         </div>
       </div>
@@ -30,20 +31,23 @@
         <div class="stat-row">
           <div class="stat-group" style="flex:0 0 auto;">
             <label for="punch">Punch</label>
-            <input type="number" id="punch" />
+     
+	<select id="punch" class="chunky-dropdown"></select>
           </div>
           <div class="stat-group" style="flex:0 0 auto;">
             <label for="kick">Kick</label>
-            <input type="number" id="kick" />
+            <select id="kick" class="chunky-dropdown"></select>
+
           </div>
           <div class="stat-group" style="flex:0 0 auto;">
             <label for="_throw">Throw</label>
-            <input type="number" id="_throw" />
+            <select id="_throw" class="chunky-dropdown"></select>
+
           </div>
           <div class="stat-group" style="flex:0 0 auto;">
   <label for="shurikens">Shurikens</label>
   <div style="display: flex; align-items: center; gap: 8px;">
-    <input type="number" id="shurikens" min="0" max="99" />
+    <select id="shurikens" class="chunky-dropdown"></select>
     <i class="fa-regular fa-star shuriken-icon"></i>
   </div>
 </div>
@@ -54,15 +58,16 @@
         <div class="stat-row">
           <div class="stat-group" style="flex:0 0 auto;">
             <label for="fate">Fate Modifier</label>
-            <input type="number" id="fate" />
+            <select id="fate" class="chunky-dropdown"></select>
+
           </div>
           <div class="stat-group" style="flex:0 0 auto;">
             <label for="innerForce">Inner Force</label>
-            <input type="number" id="innerForce" />
+            <select id="innerForce" class="chunky-dropdown"></select>
           </div>
           <div class="stat-group" style="flex:0 0 auto;">
               <label for="endurance">Endurance</label>
-	      <input type="number" id="endurance" />
+	      <select id="endurance" class="chunky-dropdown"></select>
 	  </div>
           <div style="display: flex; align-items: center; gap: 8px;">
     
@@ -130,18 +135,25 @@
     }
 
     function generateCode() {
-      const character = {
-        name: document.getElementById('name').value,endurance: document.getElementById('endurance').value,
-        innerForce: document.getElementById('innerForce').value,shurikens: document.getElementById('shurikens').value,
-        fate: document.getElementById('fate').value,location: document.getElementById('location').value,
-        ninjatools: document.getElementById('ninjatools').value,punch: document.getElementById('punch').value,
-        kick: document.getElementById('kick').value,_throw: document.getElementById('_throw').value,
-        items: document.getElementById('items').value,notes: document.getElementById('notes').value
-      };
-      const code = encodeToWords(character);
-      localStorage.setItem(code, JSON.stringify(character));
-      document.getElementById('codeOutput').textContent = "Save Code:\n" + code;
-    }
+  const character = {
+    name: document.getElementById('name').value,
+    endurance: document.getElementById('endurance').value,
+    innerForce: document.getElementById('innerForce').value,
+    shurikens: document.getElementById('shurikens').value,
+    fate: document.getElementById('fate').value,
+    location: document.getElementById('location').value,
+    ninjatools: document.getElementById('ninjatools').value,
+    punch: document.getElementById('punch').value,
+    kick: document.getElementById('kick').value,
+    _throw: document.getElementById('_throw').value,
+    items: document.getElementById('items').value,
+    notes: document.getElementById('notes').value
+  };
+
+  const code = encodeToWords(character);
+  localStorage.setItem(code, JSON.stringify(character));
+  document.getElementById('codeOutput').textContent = "Save Code:\n" + code;
+}
 
 function rollBothDice() {
   const die1 = document.getElementById("die1");
@@ -166,6 +178,35 @@ function rollBothDice() {
     }
   }, 80); // Speed of face changes
 }
+
+
+function createDropdown(id, min, max, defaultValue = "") {
+  const select = document.getElementById(id);
+  select.innerHTML = "";
+
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = "--";
+  select.appendChild(defaultOption);
+
+  for (let i = min; i <= max; i++) {
+    const option = document.createElement("option");
+    option.value = i;
+    option.textContent = i;
+    if (String(i) === String(defaultValue)) {
+      option.selected = true;
+    }
+    select.appendChild(option);
+  }
+}
+createDropdown("location", 1, 430,1);
+  createDropdown("punch", -5, 5,0);
+createDropdown("kick", -5, 5,0);
+createDropdown("_throw", -5, 5,0);
+createDropdown("shurikens", 0, 9,5);
+createDropdown("fate", -5, 5,0);
+createDropdown("innerForce", -5, 10,5);
+createDropdown("endurance", 0, 20,20);
 
     function loadCode() {
       const code = document.getElementById('saveCode').value.trim();
