@@ -79,7 +79,13 @@ function createBootstrapDropdown(id, min, max, defaultValue = "") {
   const button = document.createElement("button");
   button.className = "btn btn-warning dropdown-toggle zoomable-button zoomable-text";
   button.style.fontSize = "1.4em";
-  button.style.width = "240px";
+  // Option 1: Set wider width for shurikens
+  if (id === "shurikens") {
+      button.style.width = "320px"; // or 300px, depending on icon size
+  } else {
+      button.style.width = "240px";
+  }
+
   button.style.padding = "10px 20px";
   button.type = "button";
   button.setAttribute("data-bs-toggle", "dropdown");
@@ -96,6 +102,7 @@ function createBootstrapDropdown(id, min, max, defaultValue = "") {
   }
 
   button.appendChild(valueSpan);
+ 
 
   // Create the dropdown menu
   const ul = document.createElement("ul");
@@ -126,18 +133,26 @@ function createBootstrapDropdown(id, min, max, defaultValue = "") {
   dropdownDiv.appendChild(ul);
 
   container.appendChild(dropdownDiv);
-
-  // Helper function to generate 3x3 shuriken grid
-  function generateShurikenGrid(value) {
-    let html = '<div class="shuriken-grid">';
-    for (let i = 0; i < 9; i++) {
-      const filled = i < value;
-      html += `<i class="fa-${filled ? 'solid' : 'regular'} fa-star shuriken-icon"></i>`;
-      if ((i + 1) % 3 === 0) html += "<br>";
+  if (id === "shurikens") {
+  setTimeout(() => {
+    const iconRow = button.querySelector(".shuriken-row");
+    if (iconRow) {
+      const width = iconRow.offsetWidth + 40; // add padding
+      button.style.width = `${width}px`;
     }
-    html += "</div>";
-    return html;
+  }, 0);
+}
+
+
+  function generateShurikenGrid(value) {
+  let html = '<div class="shuriken-row">';
+  for (let i = 0; i < 9; i++) {
+    const filled = i < value;
+    html += `<i class="fa-${filled ? 'solid' : 'regular'} fa-star shuriken-icon"></i>`;
   }
+  html += "</div>";
+  return html;
+ }
 }
 
 
@@ -205,6 +220,20 @@ document.addEventListener("DOMContentLoaded", () => {
     zoomableSlider.style.width = `${zoom * 3.6}px`;  // base width = 360px
     zoomableSlider.style.height = `${zoom * 0.28}px`; // base height = 28px
   });
+
+
+// ✅ Dynamically resize shuriken button to fit icon row
+const shurikenButton = document.querySelector("#shurikens .btn");
+const iconRow = shurikenButton?.querySelector(".shuriken-row");
+
+if (shurikenButton && iconRow) {
+  requestAnimationFrame(() => {
+    const rowWidth = iconRow.offsetWidth;
+    const padding = zoom * 0.16 * 2; // horizontal padding
+    shurikenButton.style.width = `${rowWidth + padding}px`;
+  });
+}
+
 
   // Dice click handlers
   document.getElementById("die1").addEventListener("click", rollBothDice);

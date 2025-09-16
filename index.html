@@ -34,9 +34,14 @@
 
 
 <!-- Dice on next line -->
-<div style="margin-top: 20px; display: flex; gap: 40px; justify-content: flex-start;">
+<div style="margin-top: 20px; display: flex; gap: 40px; align-items: center; justify-content: flex-start;">
   <i class="fas fa-dice-six dice-icon zoomable-dice" id="die1" style="font-size: 64px; cursor: pointer; color: #f39c12;"></i>
   <i class="fas fa-dice-four dice-icon zoomable-dice" id="die2" style="font-size: 64px; cursor: pointer; color: #f39c12;"></i>
+
+  <div class="stat-group">
+    <label for="shurikens">Shurikens</label>
+    <div id="shurikens" class="dropdown"></div>
+  </div>
 </div>
 
 
@@ -54,10 +59,6 @@
     <div class="stat-group">
       <label for="_throw">Throw</label>
       <div id="_throw" class="dropdown"></div>
-    </div>
-    <div class="stat-group">
-      <label for="shurikens">Shurikens</label>
-      <div id="shurikens" class="dropdown"></div>
     </div>
   </div>
 </div>
@@ -160,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   zoomSlider.addEventListener("input", () => {
     const zoom = parseInt(zoomSlider.value);
-    const span = btn.querySelector("span");
+    
 
 
     zoomDisplay.textContent = `${zoom}%`;
@@ -189,28 +190,40 @@ document.addEventListener("DOMContentLoaded", () => {
     //const zoomableButtons = document.querySelectorAll(".btn.dropdown-toggle");
     const zoomableButtons = document.querySelectorAll(".zoomable-button");
     zoomableButtons.forEach(btn => {
-  const baseFont = 1.2; // matches initial fontSize in em
-  const baseWidth = 90; // matches initial width in px
-  
-  const fontSize = baseFont + (zoom) * 0.002; // subtle growth
-  const width = baseWidth + (zoom  * 0.06);      // gentle width increase
-  //console.log(btn.span.id);
-  // Make the endurance button twice as wide
+  const baseFont = 1.2;
+  const baseWidth = 90;
+  const span = btn.querySelector("span");
 
-  
+  let finalFontSize = baseFont + zoom * 0.002;
+  let finalWidth = baseWidth + zoom * 0.06;
+
   if (span && span.id === "enduranceValue") {
-    width *= 2;
+    finalWidth *= 2;
   }
-  
+
   if (span && span.id === "shurikensValue" && zoom >= 150) {
-  finalFontSize = 1.4; // cap font size
-  finalWidth = 240;    // cap width
+    finalFontSize = 1.4;
+    finalWidth = 320; // wide enough for 9 icons
+  }
+
+    btn.style.fontSize = `${finalFontSize}em`;
+    btn.style.width = `${finalWidth}px`;
+    btn.style.padding = `${zoom * 0.08}px ${zoom * 0.16}px`;
+  });
+
+// ✅ Dynamically resize shuriken button to fit icon row
+const shurikenButton = document.querySelector("#shurikens .btn");
+const iconRow = shurikenButton?.querySelector(".shuriken-row");
+
+if (shurikenButton && iconRow) {
+  requestAnimationFrame(() => {
+    const rowWidth = iconRow.offsetWidth + 42; // add buffer for safety
+    const padding = zoom * 0.16 * 2; // horizontal padding
+    shurikenButton.style.width = `${rowWidth + padding}px`;
+  });
 }
 
-  btn.style.fontSize = `${fontSize}em`;
-  btn.style.width = `${width}px`;
-  btn.style.padding = `${zoom * 0.08}px ${zoom * 0.16}px`;
-});
+
   });
 });
 

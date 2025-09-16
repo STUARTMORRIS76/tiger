@@ -22,14 +22,6 @@
   font-size: 1.4em !important;
 }
 
-.shuriken-grid {
-  line-height: 0.5;
-}
-
-.shuriken-icon {
-  font-size: 0.6em;
-  margin: 2px;
-}
 .dice-icon {
   font-size: 40px;
   color: #444;
@@ -235,26 +227,48 @@ select,
   overflow-y: auto;
 }
 
+.shuriken-icon {
+  font-size: 0.6em;
+  margin: 2px;
+}
+
+
+.shuriken-grid {
+  line-height: 1.2;
+  transform: scale(0.9);
+}
+.shuriken-row {
+  display: inline-flex;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .ninja-skills label {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 25px;
+  margin-left: 50px;
   font-weight: normal;
   color: #3b2f2f;
   font-size: 1.1em;
 }
 .ninja-skills input[type="checkbox"] {
-  transform: scale(1.2);
+  transform: scale(2.5);
+padding: 15px; /* Add 5px padding on all sides */
 }
 .ninja-tools label {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 25px;
+  margin-left: 50px;
   font-weight: normal;
   color: #3b2f2f;
   font-size: 1.1em;
 }
 .ninja-tools input[type="checkbox"] {
-  transform: scale(1.2);
+  transform: scale(2.5);
+padding: 15px; /* Add 5px padding on all sides */
 }
 
