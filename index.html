@@ -6,11 +6,10 @@
   <meta charset="UTF-8" />
   <title>Way of the Tiger Character Sheet</title>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+<link href="https://fonts.cdnfonts.com/css/wonton" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <link rel="stylesheet" href="styles.css">
-<script src="ninjawords.js"></script>
 <script src="script.js"></script>
 
   <script>
@@ -24,7 +23,7 @@
   <span id="zoomValue">100%</span>
 </div>
 
-    <h1>🐅 Way of the Tiger Character Sheet...</h1>
+    <h1><img src="tiger.png" alt="tiger icon" style="background-color: transparent; width: 48px; height: 48px;" /> Way of the Tiger Character Sheet...</h1>
     <div class="scroll-inner">
       <div class="stat-group" style="flex:0 0 auto;">
   <label for="locationRange" style="font-size: 1.2em;">Current Location</label>
@@ -199,6 +198,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (span && span.id === "enduranceValue") {
     width *= 2;
   }
+  //if (span && span.id === "shurikensValue") {
+  //  width *= 2;
+  //}
+
+
+  console.log(btn);
 
   btn.style.fontSize = `${fontSize}em`;
   btn.style.width = `${width}px`;

@@ -62,36 +62,40 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
-function createBootstrapDropdown(id, min, max, defaultValue = ""){
-
-const container = document.getElementById(id);
-if (!container) {
-  console.error("Element with id \"" + id + "\" not found.");
-  return;
-}
+function createBootstrapDropdown(id, min, max, defaultValue = "") {
+  const container = document.getElementById(id);
+  if (!container) {
+    console.error(`Element with id "${id}" not found.`);
+    return;
+  }
 
   container.innerHTML = "";
 
   const hasDefault = defaultValue !== null && defaultValue !== undefined && defaultValue !== "";
-  container.setAttribute("data-value", hasDefault ? defaultValue : "");
+  const currentValue = hasDefault ? parseInt(defaultValue) : 0;
+  container.setAttribute("data-value", currentValue);
 
   // Create the dropdown toggle button
   const button = document.createElement("button");
   button.className = "btn btn-warning dropdown-toggle zoomable-button zoomable-text";
-  button.style.fontSize = "1.4em"; // Larger base size
-  button.style.width = "240px";    // Wider base width
-  button.style.padding = "10px 20px"; // Comfortable padding
-
+  button.style.fontSize = "1.4em";
+  button.style.width = "240px";
+  button.style.padding = "10px 20px";
   button.type = "button";
   button.setAttribute("data-bs-toggle", "dropdown");
   button.setAttribute("aria-expanded", "false");
 
-  const displayValue = hasDefault ? defaultValue : "--";
-  button.innerHTML = `<span id="${id}Value" class="zoomable-text">${displayValue}</span>`;
+  const valueSpan = document.createElement("span");
+  valueSpan.id = `${id}Value`;
+  valueSpan.className = "zoomable-text";
 
+  if (id === "shurikens") {
+    valueSpan.innerHTML = generateShurikenGrid(currentValue);
+  } else {
+    valueSpan.textContent = hasDefault ? defaultValue : "--";
+  }
 
-  
+  button.appendChild(valueSpan);
 
   // Create the dropdown menu
   const ul = document.createElement("ul");
@@ -105,20 +109,35 @@ if (!container) {
     a.textContent = i;
     a.onclick = function (e) {
       e.preventDefault();
-      document.getElementById(`${id}Value`).textContent = i;
       container.setAttribute("data-value", i);
+      if (id === "shurikens") {
+        valueSpan.innerHTML = generateShurikenGrid(i);
+      } else {
+        valueSpan.textContent = i;
+      }
     };
     li.appendChild(a);
     ul.appendChild(li);
   }
 
-  // Wrap button and menu in a dropdown container
   const dropdownDiv = document.createElement("div");
   dropdownDiv.className = "dropdown";
   dropdownDiv.appendChild(button);
   dropdownDiv.appendChild(ul);
 
   container.appendChild(dropdownDiv);
+
+  // Helper function to generate 3x3 shuriken grid
+  function generateShurikenGrid(value) {
+    let html = '<div class="shuriken-grid">';
+    for (let i = 0; i < 9; i++) {
+      const filled = i < value;
+      html += `<i class="fa-${filled ? 'solid' : 'regular'} fa-star shuriken-icon"></i>`;
+      if ((i + 1) % 3 === 0) html += "<br>";
+    }
+    html += "</div>";
+    return html;
+  }
 }
 
 

@@ -1,7 +1,5 @@
 /* Icon styles */
 
-
-
 .dropdown .btn span {
   display: inline-block;
   width: 100%;
@@ -20,12 +18,14 @@
 }
 
 
-.shuriken-icon {
-  font-size: 28px;
-  color: black; /* silver star */
-  transition: transform 0.2s ease;
+.shuriken-grid {
+  line-height: 0.5;
 }
 
+.shuriken-icon {
+  font-size: 0.6em;
+  margin: 2px;
+}
 .dice-icon {
   font-size: 40px;
   color: #444;
@@ -52,7 +52,7 @@ body {
 h1 {
   text-align: center;
   color: #3b2f2f;
-  font-family: 'Papyrus', fantasy;
+  font-family: 'wonton', sans-serif;
   font-size: 38px;
   margin: 0 0 16px 0;
   border-bottom: 2px solid #3b2f2f;
