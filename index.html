@@ -160,6 +160,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   zoomSlider.addEventListener("input", () => {
     const zoom = parseInt(zoomSlider.value);
+    const span = btn.querySelector("span");
+
+
     zoomDisplay.textContent = `${zoom}%`;
 
     scrollContainer.style.fontSize = `${zoom * 0.01}em`;
@@ -188,22 +191,21 @@ document.addEventListener("DOMContentLoaded", () => {
     zoomableButtons.forEach(btn => {
   const baseFont = 1.2; // matches initial fontSize in em
   const baseWidth = 90; // matches initial width in px
-
+  
   const fontSize = baseFont + (zoom) * 0.002; // subtle growth
   const width = baseWidth + (zoom  * 0.06);      // gentle width increase
   //console.log(btn.span.id);
   // Make the endurance button twice as wide
 
-  const span = btn.querySelector("span");
+  
   if (span && span.id === "enduranceValue") {
     width *= 2;
   }
-  //if (span && span.id === "shurikensValue") {
-  //  width *= 2;
-  //}
-
-
-  console.log(btn);
+  
+  if (span && span.id === "shurikensValue" && zoom >= 150) {
+  finalFontSize = 1.4; // cap font size
+  finalWidth = 240;    // cap width
+}
 
   btn.style.fontSize = `${fontSize}em`;
   btn.style.width = `${width}px`;

@@ -17,6 +17,10 @@
   transform: translateY(-50%);
 }
 
+.no-zoom {
+  transform: scale(1) !important;
+  font-size: 1.4em !important;
+}
 
 .shuriken-grid {
   line-height: 0.5;
